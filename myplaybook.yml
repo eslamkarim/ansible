@@ -1,0 +1,5 @@
+- hosts: gocd-server
+  remote_user: ubuntu
+  become: true
+  roles:
+        - gocd-server 

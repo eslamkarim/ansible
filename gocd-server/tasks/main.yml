@@ -1,0 +1,21 @@
+---
+# tasks file for gocd-server
+
+- name: add gocd server repo
+  apt_repository:
+          repo: "deb https://download.gocd.org /"
+          state: present
+ 
+- name: add gocd key
+  apt_key:
+          url: https://download.gocd.org/GOCD-GPG-KEY.asc
+          state: present
+
+- name: install gocd server
+  apt:
+          name: go-server
+- name: start gocd
+  service:
+          name:  go-server
+          state: started
+          enabled: yes  
