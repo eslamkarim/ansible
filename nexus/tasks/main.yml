@@ -1,0 +1,45 @@
+---
+# tasks file for nexus
+
+- name: install java
+  yum:
+          name: java-1.8.0-openjdk.x86_64
+          state: latest
+- name: add user nexus
+  user:
+          name: nexus
+          state: present
+
+- name: make a directory called app
+  file:
+          path: /app
+          state: directory
+
+- name: extract nexus and extract to app
+  unarchive:
+          src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+          dest: /app
+          remote_src: yes
+          owner: nexus
+          group: nexus
+- name: change folder name
+  command: mv /app/nexus-3.22.0-02 /app/nexus
+
+- name: change line in config file
+  lineinfile:
+          path: /app/nexus/bin/nexus.rc
+          line: run_as_user="nexus"
+
+
+- name: copy file to service file
+  copy:
+          src: /home/ubuntu/ansible/nexus.service
+          dest: /etc/systemd/system/nexus.service
+          owner: root
+          group: root 
+
+- name: start nexus
+  service:
+          name: nexus
+          state: started
+          enabled: yes

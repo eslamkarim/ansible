@@ -1,11 +1,17 @@
-- hosts: gocd-server
-  remote_user: ubuntu
-  become: true
-  roles:
-        - gocd-server
+#- hosts: gocd-server
+  #  remote_user: ubuntu
+  #  become: true
+  #  roles:
+          #        - gocd-server
   
-- hosts: gocd-agent
-  remote_user: ubuntu
+          #- hosts: gocd-agent
+  #  remote_user: ubuntu
+  #  become: true
+  #  roles:
+          #        - gocd-agent
+
+- hosts: nexus
+  remote_user: ec2-user
   become: true
   roles:
-        - gocd-agent
+          - nexus
