@@ -2,4 +2,10 @@
   remote_user: ubuntu
   become: true
   roles:
-        - gocd-server 
+        - gocd-server
+  
+- hosts: gocd-agent
+  remote_user: ubuntu
+  become: true
+  roles:
+        - gocd-agent

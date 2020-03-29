@@ -1,5 +1,5 @@
 [gocd-server]
 3.9.144.184
 
-[gocd-client]
+[gocd-agent]
 35.176.38.217

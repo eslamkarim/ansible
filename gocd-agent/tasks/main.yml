@@ -1,0 +1,26 @@
+---
+# tasks file for gocd-agent
+
+- name: add gocd agent repo
+  apt_repository:
+          repo: "deb https://download.gocd.org /"
+          state: present
+          update_cache: no
+- name: add gocd key
+  apt_key:
+          url: https://download.gocd.org/GOCD-GPG-KEY.asc
+          state: present
+         
+- name: update repos
+  apt:
+          update_cache: yes
+          upgrade: dist
+
+- name: install gocd agent
+  apt:
+          name: go-agent
+- name: start gocd
+  service:
+          name:  go-agent
+          state: started
+          enabled: yes
